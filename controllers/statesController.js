@@ -196,7 +196,7 @@ const deleteFunFacts = async (req, res) => {
         res.status(404).json({ "message": `No Fun Fact found at that index for ${stateQuery.state}` });
     }
     else {
-        currentState.funfacts.splice(funFactIndex - 1, funFactIndex - 1);
+        currentState.funfacts.splice(funFactIndex - 1, 1);
         const result = await currentState.save();
         res.status(200).json(result);
     }
