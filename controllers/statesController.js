@@ -12,7 +12,7 @@ const getAllStates = async (req, res) => {
         modifiedStates.push({ ...element, "funfacts": queryResult?.funfacts });
     }
 
-    let returnedValues = modifiedStates;
+    let returnedValues;
 
     if (req?.query?.contig === 'true') {
         returnedValues = modifiedStates.filter((element) => element.code !== 'AK' && element.code != 'HI');
