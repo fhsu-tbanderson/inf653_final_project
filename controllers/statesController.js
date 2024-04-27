@@ -171,7 +171,7 @@ const updateFunFacts = async (req, res) => {
         res.status(404).json({ "message": `No Fun Facts found for ${stateQuery.state}` });
     }
 
-    if (currentState?.funfacts[funFactIndex - 1] === undefined) {
+    else if (currentState?.funfacts[funFactIndex - 1] === undefined) {
         res.status(404).json({ "message": `No Fun Fact found at that index for ${stateQuery.state}` });
     }
     else {
@@ -197,7 +197,7 @@ const deleteFunFacts = async (req, res) => {
         res.status(404).json({ "message": `No Fun Facts found for ${stateQuery.state}` });
     }
 
-    if (currentState.funfacts[funFactIndex - 1] === undefined) {
+    else if (currentState.funfacts[funFactIndex - 1] === undefined) {
         res.status(404).json({ "message": `No Fun Fact found at that index for ${stateQuery.state}` });
     }
     else {
