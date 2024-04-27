@@ -9,14 +9,7 @@ const getAllStates = async (req, res) => {
     for (const element of stateData.states) {
         let queryResult = await State.findOne({ stateCode: element.code }, 'funfacts').exec();
 
-
-        if (queryResult?.funfacts) {
-            modifiedStates.push({ ...element, "funfacts": queryResult?.funfacts });
-        }
-        else {
-            modifiedStates.push(element);
-        }
-
+        modifiedStates.push({ ...element, "funfacts": queryResult?.funfacts });
     }
 
     let returnedValues = modifiedStates;
@@ -30,7 +23,9 @@ const getAllStates = async (req, res) => {
 
     res.status(200).json(returnedValues);
 
-};
+
+}
+
 
 const getState = async (req, res) => {
     const stateQuery = stateData.states.find((element) => element.code === req.state)
