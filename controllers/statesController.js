@@ -27,13 +27,9 @@ const getAllStates = async (req, res) => {
 
 const getState = async (req, res) => {
     const stateQuery = stateData.states.find((element) => element.code === req.state)
-    const queryResult = await State.findOne({ stateCode: req.state }, 'funfacts').exec();
-    const funFacts = queryResult?.funfacts ? queryResult.funfacts : [];
 
 
-    const modifiedState = { ...stateQuery, "funfacts": funFacts };
-
-    res.status(200).json(modifiedState);
+    res.status(200).json(stateQuery);
 
 
 }
