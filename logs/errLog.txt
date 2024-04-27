@@ -1,0 +1,8 @@
+20240421	20:50:35	e77de09e-7852-4ef2-9b48-e02c0528f0ba	Error: ENOENT: no such file or directory, stat 'C:\Users\ander\OneDrive\Documents\Career Development\Computer Science\INF653 Back End Web Development\final_project\views\404.html'
+20240421	20:50:35	7b984a88-3ed9-4b36-863f-32bdbba25411	Error: ENOENT: no such file or directory, stat 'C:\Users\ander\OneDrive\Documents\Career Development\Computer Science\INF653 Back End Web Development\final_project\views\404.html'
+20240421	20:50:42	87ad09f1-cafe-427c-b760-1bd341ac7e75	Error: ENOENT: no such file or directory, stat 'C:\Users\ander\OneDrive\Documents\Career Development\Computer Science\INF653 Back End Web Development\final_project\views\404.html'
+20240421	20:50:42	72031e43-d791-4ee5-a60d-41faca03bf41	Error: ENOENT: no such file or directory, stat 'C:\Users\ander\OneDrive\Documents\Career Development\Computer Science\INF653 Back End Web Development\final_project\views\404.html'
+20240421	20:51:06	033bdf7b-9455-4f6f-ac3c-5cccba12a4b4	Error: ENOENT: no such file or directory, stat 'C:\Users\ander\OneDrive\Documents\Career Development\Computer Science\INF653 Back End Web Development\final_project\views\404.html'
+20240421	20:51:06	e527ce66-99e3-455f-bf42-f63551c724a2	Error: ENOENT: no such file or directory, stat 'C:\Users\ander\OneDrive\Documents\Career Development\Computer Science\INF653 Back End Web Development\final_project\views\404.html'
+20240421	20:56:49	dfa3e556-575d-41ba-99a8-1d0b8ad38394	Error: ENOENT: no such file or directory, stat 'C:\Users\ander\OneDrive\Documents\Career Development\Computer Science\INF653 Back End Web Development\final_project\views\index.html'
+20240424	06:55:34	48a8b51d-1537-4ece-bf4e-436e155a5e0e	MongooseError: Model.findOne() no longer accepts a callback
