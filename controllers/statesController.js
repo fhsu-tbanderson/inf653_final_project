@@ -8,8 +8,15 @@ const getAllStates = async (req, res) => {
     const modifiedStates = [];
     for (const element of stateData.states) {
         let queryResult = await State.findOne({ stateCode: element.code }, 'funfacts').exec();
-        let funFacts = queryResult?.funfacts ? queryResult.funfacts : [];
-        modifiedStates.push({ ...element, "funfacts": funFacts });
+
+
+        if (queryResult?.funfacts) {
+            modifiedStates.push({ ...element, "funfacts": queryResult?.funfacts });
+        }
+        else {
+            modifiedStates.push(element);
+        }
+
     }
 
     let returnedValues = modifiedStates;
@@ -27,9 +34,19 @@ const getAllStates = async (req, res) => {
 
 const getState = async (req, res) => {
     const stateQuery = stateData.states.find((element) => element.code === req.state)
+    const queryResult = await State.findOne({ stateCode: req.state }, 'funfacts').exec();
+    let modifiedState;
+
+    if (queryResult?.funfacts) {
+        modifiedState = { ...stateQuery, "funfacts": queryResult?.funfacts };
+    }
+    else {
+        modifiedState = stateQuery;
+    }
 
 
-    res.status(200).json(stateQuery);
+
+    res.status(200).json(modifiedState);
 
 
 }
@@ -150,7 +167,11 @@ const updateFunFacts = async (req, res) => {
 
     const currentState = await State.findOne({ stateCode: req.state }).exec();
 
-    if (currentState.funfacts[funFactIndex - 1] === undefined) {
+    if (!currentState?.funfacts) {
+        res.status(404).json({ "message": `No Fun Facts found for ${stateQuery.state}` });
+    }
+
+    if (currentState?.funfacts[funFactIndex - 1] === undefined) {
         res.status(404).json({ "message": `No Fun Fact found at that index for ${stateQuery.state}` });
     }
     else {
@@ -171,6 +192,10 @@ const deleteFunFacts = async (req, res) => {
     const stateQuery = stateData.states.find((element) => element.code === req.state)
     const funFactIndex = req?.body?.index;
     const currentState = await State.findOne({ stateCode: req.state }).exec();
+
+    if (!currentState?.funfacts) {
+        res.status(404).json({ "message": `No Fun Facts found for ${stateQuery.state}` });
+    }
 
     if (currentState.funfacts[funFactIndex - 1] === undefined) {
         res.status(404).json({ "message": `No Fun Fact found at that index for ${stateQuery.state}` });
