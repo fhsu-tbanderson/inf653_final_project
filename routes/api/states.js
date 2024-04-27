@@ -4,7 +4,7 @@ const statesController = require('../../controllers/statesController');
 const verifyStateAbbreviation = require('../../middleware/verifyAbbreviations');
 
 router.route('/')
-    .get(statesController.getAllStates)
+    .get(verifyStateAbbreviation, statesController.getAllStates)
 
 
 
