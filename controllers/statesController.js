@@ -3,27 +3,29 @@ const stateData = {
     states: require('../models/statesData.json')
 };
 
+const mergeFunFact = async (item) => {
+    let queryResult = await State.findOne({ stateCode: item.code }, 'funfacts').exec();
+    return { ...item, funfacts: queryResult?.funfacts ?? [] };
+}
+
 const getAllStates = async (req, res) => {
+    try {
+        const promises = stateData.states.map(mergeFunFact);
+        let modifiedStates = await Promise.all(promises);
 
-    const modifiedStates = [];
-    for (const element of stateData.states) {
-        let queryResult = await State.findOne({ stateCode: element.code }, 'funfacts').exec();
+        if (req?.query?.contig === 'true') {
+            modifiedStates = modifiedStates.filter((element) => element.code !== 'AK' && element.code !== 'HI');
+        }
+        if (req?.query?.contig === 'false') {
+            modifiedStates = modifiedStates.filter((element) => element.code === 'AK' || element.code === 'HI');
+        }
 
-        modifiedStates.push({ ...element, "funfacts": queryResult?.funfacts });
+        res.status(200).json(modifiedStates);
+    } catch (error) {
+
+        console.error(error);
+        res.status(500).send('Error processing request');
     }
-
-    let returnedValues;
-
-    if (req?.query?.contig === 'true') {
-        returnedValues = modifiedStates.filter((element) => element.code !== 'AK' && element.code != 'HI');
-    }
-    if (req?.query?.contig === 'false') {
-        returnedValues = modifiedStates.filter((element) => element.code === 'AK' || element.code === 'HI');
-    }
-
-    res.status(200).json(returnedValues);
-
-
 }
 
 
